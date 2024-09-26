@@ -1,17 +1,40 @@
 package com.web_crawler;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import com.web_crawler.crawler.WebCrawler;
+import com.web_crawler.file_handler.FileHandler;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import java.io.IOException;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        WebCrawler webCrawler = new WebCrawler();
+        FileHandler fileHandler = new FileHandler();
+        List<String> crawlWebsite;
+        Map<String, String> crawlUrl;
+
+        System.out.println("\t\t\t\tWelcome to WebCrawler!\n");
+
+        // Get the URl from stdin
+        System.out.print("Enter the URL to crawl: ");
+        String url = scanner.nextLine();
+
+        System.out.println("Enter the name of the file to be saved (No need for file extension): ");
+        String fileName = scanner.nextLine();
+
+        scanner.close();
+
+        // Crawl the website and url
+        crawlWebsite = webCrawler.crawlWebsite(url);
+        crawlUrl = webCrawler.crawlUrl(url);
+
+        // Outputting to stdout
+        System.out.println("URL: " + url);
+        System.out.println("Links: " + crawlWebsite);
+        System.out.println("URL Parameters: " + crawlUrl);
+
+        // Saving the content
+        fileHandler.saveToJson(url, crawlWebsite, crawlUrl, fileName);
     }
 }

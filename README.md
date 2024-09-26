@@ -20,7 +20,7 @@ This project is a simple web crawler written in Java. It fetches all the links f
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/gautamrajesh007/web-crawler.git
+   git clone https://github.com/gautamrajesh007/WebCrawler.git
    cd web-crawler
 
 2. **Open the project in IntelliJ IDEA:**
